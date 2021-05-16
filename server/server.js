@@ -1,4 +1,6 @@
 require('dotenv').config();
+const app = require("express")();
+const server = require("http").createServer(app);
 const mongoose = require('mongoose');
 const Document = require('./Document');
 
@@ -9,7 +11,9 @@ mongoose.connect(process.env.DB_CONNECTION_STRING, {
     useCreateIndex: true,
 });
 
-const io = require('socket.io')(3001, {
+const PORT = process.env.PORT || 5000;
+
+const io = require('socket.io')(server, {
     cors: {
         origin: process.env.ORIGIN,
         methods: ['GET', 'POST'],
@@ -41,3 +45,5 @@ async function findOrCreatedocument(id) {
     return await Document.create({_id: id, data: defaultValue});
 
 }
+
+server.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

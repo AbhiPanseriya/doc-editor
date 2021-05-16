@@ -5,10 +5,11 @@
   "license": "MIT",
   "scripts": {
     "start": "node server.js",
-		"dev": "nodemon server.js"
+    "dev": "nodemon server.js"
   },
   "dependencies": {
     "dotenv": "^9.0.2",
+    "express": "^4.17.1",
     "mongoose": "^5.12.9",
     "socket.io": "^4.1.1"
   },
